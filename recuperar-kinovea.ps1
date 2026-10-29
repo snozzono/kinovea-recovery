@@ -56,6 +56,7 @@ if (Test-Path -LiteralPath $cfg) {
         foreach ($m in [regex]::Matches($texto, '[A-Za-z]:\\[^<>"|?*\r\n]+')) {
             $p = $m.Value.Trim()
             if (Test-Path -LiteralPath $p -PathType Container) { $raices.Add($p) }
+            elseif (Test-Path -LiteralPath $p -PathType Leaf) { $raices.Add((Split-Path -Parent $p)) }
         }
     }
 }
